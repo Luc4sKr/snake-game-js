@@ -28,21 +28,24 @@ function main(currentTime) {
 }
 
 
-window.requestAnimationFrame(main)
+window.requestAnimationFrame(main);
 
 
+// Função resposável pela atualização
 function update() {
     updateSnake();
     updateFood();
     checkDeath();
 }
 
+// Função responsável por desenhar tudo na tela
 function draw() {
     gameBoard.innerHTML = ""; // Limpa a tela
     drawSnake(gameBoard);
     drawFood(gameBoard);
 }
 
+// Checa se a cobra colidiu com a borda ou com ela mesma
 function checkDeath() {
     gameOver = outsideGrid(getSnakeHead()) || snakeIntersection()
 }
