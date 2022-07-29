@@ -31,20 +31,29 @@ export function expandSnake(amount) {
     newSegments += amount;
 }
 
-export function onSnake(position) {
-    return snakeBody.some(segment => {
+export function onSnake(position, { ignoredHead = false } = {}) {
+    return snakeBody.some((segment, index) => {
+        if (ignoredHead && index === 0) return false;
         return equalPosition(segment, position);
     });
-}
+};
+
+export function getSnakeHead() {
+    return snakeBody[0];
+};
+
+export function snakeIntersection() {
+    return onSnake(snakeBody[0], { ignoredHead: true });
+};
 
 function equalPosition(pos1, pos2) {
     return pos1.x === pos2.x && pos1.y === pos2.y;
-}
+};
 
 function addSegments() {
     for (let i=0; i<newSegments; i++) {
         snakeBody.push({ ...snakeBody[snakeBody.length -1 ] });
-    }
+    };
 
     newSegments = 0;
-}
+};
